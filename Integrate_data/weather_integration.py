@@ -2,11 +2,7 @@ import numpy as np
 import pandas as pd
 import datetime
 
-if __name__ == "__main__":
-
-    weather = pd.read_csv('station12.txt')
-    bike = pd.read_csv("1.txt")
-
+def add_weather(weather, bike):
     temp=[]
     RH=[]
     WS=[]
@@ -40,9 +36,30 @@ if __name__ == "__main__":
         
     w = pd.DataFrame({'temp': temp, 'RH':RH, 'WS':WS, 'Precp':Precp})
     bike = bike.join(w)
+    return bike
 
-    print(bike.head(1))
-    bike.to_csv("test.txt", index=False)
+def output_file(bike_weather):
+    bike_weather.to_csv("test.txt", index=False)
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='Data Mining HW2')
+    parser.add_argument('-b', type=str,
+                            help="Input the bike station", 
+                            required=True)
+    parser.add_argument("-w", type=str, 
+                            help="Input the weather station corresponded to the bike station", 
+                            required=True)
+   
+
+    args = parser.parse_args()
+
+    weather = pd.read_csv('station12.txt')
+    bike = pd.read_csv("1.txt")
+
+    bike_weather = add_weather(weather, bike)
+    output_file(bike_weather)
             
 
 
