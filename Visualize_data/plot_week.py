@@ -45,7 +45,7 @@ def plotWeek(bike):
         plt.ylabel("Empty")
         plt.title(week_name[i])
         xTicks = np.linspace(0, 24, num=len(weekX[i]))
-        plt.plot(xTicks, weekY[i], color=color[i], label=week_name[i])
+        plt.scatter(xTicks, weekY[i], color=color[i], label=week_name[i])
         t=np.arange(24)
         plt.xticks(range(24), (t))
         
@@ -104,31 +104,31 @@ def getWeekend(bike):
 
 if __name__ == "__main__":
 
-    bike = pd.read_csv("174.txt")
+    bike = pd.read_csv("97.txt")
 
     
     # Week
-    plotWeek(bike)
+    # plotWeek(bike)
 
     # Weekend/Weekdat
-    # x1, y1 = getWeekend(bike)
-    # x2, y2 = getWeekday(bike)
+    x1, y1 = getWeekend(bike)
+    x2, y2 = getWeekday(bike)
 
-    # plt.xlabel("Time")
-    # plt.ylabel("Empty")
+    plt.xlabel("Time")
+    plt.ylabel("Empty")
 
-    # xTicks1 = np.linspace(0, 24, num=len(x1))
-    # plt.plot(xTicks1, y1, color='blue', label='weekend', linewidth=0.5)
+    xTicks1 = np.linspace(0, 24, num=len(x1))
+    plt.scatter(xTicks1, y1, color='blue', s=5, label='weekend', linewidth=0.3)
 
-    # xTicks2 = np.linspace(0, 24, num=len(x2))
-    # plt.plot(xTicks2, y2, color='red', label='weekday', linewidth=0.5)
+    xTicks2 = np.linspace(0, 24, num=len(x2))
+    plt.scatter(xTicks2, y2, color='red', s=5, label='weekday', linewidth=0.3)
 
-    # t=np.arange(24)
-    # plt.xticks(range(24), (t))
+    t=np.arange(24)
+    plt.xticks(range(24), (t))
 
-    # plt.legend(loc='lower right')
-    # plt.savefig('week_empty_小巨蛋.jpg', dpi = 600)
-    #plt.show()
+    plt.legend(loc='lower right')
+    plt.savefig('week_empty_捷運劍潭站(2號出口).jpg', dpi = 600)
+    plt.show()
 
 
 
